@@ -93,7 +93,7 @@ function displayWeatherData(data, isImperial) {
   content.humidity.textContent = `${main.humidity}%`;
   content.windSpeed.textContent = `${wind.speed} ${windSpeedUnit}`;
   content.pressure.textContent = `${pressure} ${pressureUnit}`;
-  content.weatherImage.src = `/img/${weather[0].icon}.png`;
+  content.weatherImage.src = `https://refinedguides.com/weather-app/img/${weather[0].icon}.png`;
 
   const currentTimestamp = Math.floor(Date.now() / 1000);
 
