@@ -2,7 +2,7 @@ const API_KEY = "1f0868ad4687f50e1fb0345863ecf1b0";
 const BASE_API_URL = "https://api.openweathermap.org/data/2.5/weather";
 
 const content = {
-  mainGrid: document.querySelector(".grid-item:first-child"),
+  weatherData: document.querySelector(".grid-item:first-child"),
   locationName: document.querySelector(".location"),
   temp: document.querySelector(".temp"),
   unit: document.querySelector(".unit"),
@@ -17,9 +17,9 @@ const content = {
 };
 
 const searchForm = document.querySelector(".search-form");
-searchForm.addEventListener("submit", onSearchFormSubmit);
+searchForm.addEventListener("submit", handleSubmit);
 
-async function onSearchFormSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
 
   const locationName = searchForm.search.value.trim();
@@ -100,8 +100,8 @@ function displayWeatherData(data, isImperial) {
   const isDayTime =
     currentTimestamp >= sys.sunrise && currentTimestamp <= sys.sunset;
 
-  content.mainGrid.classList.toggle("day-time", isDayTime);
-  content.mainGrid.classList.toggle("night-time", !isDayTime);
+  content.weatherData.classList.toggle("day-time", isDayTime);
+  content.weatherData.classList.toggle("night-time", !isDayTime);
 }
 
 function getCurrentPosition() {
@@ -121,7 +121,7 @@ function getCurrentPosition() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
+async function initWeatherApp() {
   try {
     const { latitude, longitude } = await getCurrentPosition();
 
@@ -131,4 +131,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error fetching data on page load", error);
   }
-});
+}
+
+initWeatherApp();
